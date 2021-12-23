@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 import ps from 'process';
-import { globby } from 'globby';
+import globby from 'globby';
 
 export const LANG: string = 'lang';
 export const GEN_FOLDER: string = 'generated';
@@ -93,18 +93,6 @@ export function getAllPackageJsonPaths(): string[] {
     );
   }
   return pkgJsonPaths;
-}
-export async function getAllLangPaths(): Promise<string[]> {
-  let paths: string[] = [];
-  let pkgJsonPaths = getAllPackageJsonPaths();
-  for (const pkgPath of pkgJsonPaths) {
-    const pkg = require(pkgPath);
-    if (pkg.hasOwnProperty(LANG)) {
-      const langPath = path.dirname(pkgPath) + '/' + pkg[LANG];
-      paths = paths.concat(langPath);
-    }
-  }
-  return paths;
 }
 
 export async function getAllLangFiles(): Promise<string[]> {
