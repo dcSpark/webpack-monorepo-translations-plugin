@@ -110,7 +110,6 @@ function extractMessagesFromPackage(pkg) {
         relativePath = '*';
     }
     let cmd = `yarn formatjs extract "${relativePath}/**/*.{ts,tsx}" --ignore "${relativePath}/**/*.d.{ts,tsx}" `;
-    console.log(cmd);
     try {
         const output = child_process_1.execSync(cmd).toString('utf-8');
         return JSON.parse(output);

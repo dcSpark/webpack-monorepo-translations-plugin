@@ -35,8 +35,9 @@ export default class BuildI18nPlugin {
     compiler.hooks.watchRun.tapAsync(BuildI18nPlugin.name, async (compiler, callback) => {
       let validFilesCount = 0;
       if (compiler.modifiedFiles) {
+        const langFiles = await getAllLangFiles();
         for (const filename of compiler.modifiedFiles.values()) {
-          if (!filename.includes(GEN_FOLDER)) {
+          if (langFiles.includes(filename)) {
             validFilesCount++;
           }
         }
